@@ -1,0 +1,26 @@
+/* stylelint-disable */
+@font-face {
+    font-family: "{{ fontName }}";
+    src: {{{ src }}};
+}
+/* stylelint-enable */
+.{{ fontName }}:before {
+    display: inline-block;
+
+    vertical-align: baseline;
+    text-rendering: auto;
+
+    font-family: {{fontName}} !important;
+    font-size: inherit;
+    font-style: normal;
+
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+{{# each codepoints }}
+.{{ ../classPrefix }}{{ @key }}:before {
+    content: "\\{{ this }}";
+}
+
+{{/ each }}

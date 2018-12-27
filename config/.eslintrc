@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "indent": ["warn", 4],
+    "prefer-arrow-callback": "warn",
+    "no-cond-assign": ["error", "except-parens"],
+    "no-multi-spaces": 0,
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "amd": true,
+    "jquery": true
+  }
+}
