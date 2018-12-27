@@ -167,7 +167,7 @@ module.exports = {
             configFile: path.resolve(__dirname, '.stylelintrc')
         }),
         new BrowserSyncPlugin({
-          proxy: SiteConfig.devUrl
+          proxy: SiteConfig.proxyUrl
         }),
         new Webpack.LoaderOptionsPlugin({
             // debug: true
