@@ -25,7 +25,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../../../assets'),
         filename: devMode ? '[name].js' : '[name].[contenthash].js',
-        sourceMapFilename: "main.js.map",
+        sourceMapFilename: "[file].map",
     },
     devtool: 'source-map',
     optimization: {
@@ -73,7 +73,7 @@ module.exports = {
                     {
                         loader: "css-loader",
                         options: { 
-                            sourceMap: devMode == 'production' ? false : true,
+                            sourceMap: devMode ? true : false,
                             importLoaders: 2,
                         }
                     }, {
@@ -82,12 +82,12 @@ module.exports = {
                             config: {
                                 path: path.resolve(__dirname, 'postcss.config.js')
                             },
-                            sourceMap: devMode == 'production' ? false : true,
+                            sourceMap: devMode ? true : false,
                         }
                     }, {
                         loader: "sass-loader",
                         options: { 
-                            sourceMap: devMode == 'production' ? false : true,
+                            sourceMap: devMode ? true : false,
                         }
                     }
                 ],
@@ -154,7 +154,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: devMode ? '[name].css' : '[name].[contenthash].css',
             chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
-
         }),
         new CleanWebpackPlugin(
             ['assets'],
