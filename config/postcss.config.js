@@ -1,8 +1,8 @@
 module.exports = ({ file, options, env }) => (
     {
         plugins: {
-            // 'precss': {},
             'autoprefixer': {},
+            'postcss-focus': {},
             'cssnano': env === 'production' ? {} : false
         }
     }

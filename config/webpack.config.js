@@ -3,7 +3,7 @@ const Webpack               = require('webpack');
 const path                  = require('path');
 const CleanWebpackPlugin    = require('clean-webpack-plugin')
 const MiniCssExtractPlugin  = require("mini-css-extract-plugin");
-const StyleLintPlugin       = require('stylelint-webpack-plugin');
+const StylelintBarePlugin   = require('stylelint-bare-webpack-plugin');
 const BrowserSyncPlugin     = require('browser-sync-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const TerserPlugin          = require('terser-webpack-plugin');
@@ -16,8 +16,16 @@ let alias = {
     'isotope': 'isotope-layout',
 };
 
+let externals = {
+    jquery: 'jQuery'
+};
+
 if (typeof SiteConfig.alias === 'object') {
     alias = Object.assign(alias, SiteConfig.alias);
+}
+
+if (typeof SiteConfig.externals === 'object') {
+    externals = Object.assign(externals, SiteConfig.externals);
 }
 
 module.exports = {
@@ -61,7 +69,8 @@ module.exports = {
                         loader: "eslint-loader",
                         options: {
                             configFile: path.resolve(__dirname, '.eslintrc'),
-                            ignorePath: path.resolve(__dirname, '.eslintignore')
+                            ignorePath: path.resolve(__dirname, '.eslintignore'),
+                            fix: true
                         }
                     }
                 ],
@@ -142,6 +151,7 @@ module.exports = {
     resolve: {
         alias: alias,
     },
+    externals: externals,
     plugins: [
         new Webpack.ProvidePlugin({
             $:                  'jquery',
@@ -156,14 +166,10 @@ module.exports = {
             chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
         }),
         new CleanWebpackPlugin(
-            ['assets'],
-            {
-                beforeEmit: true,
-                root: path.resolve(__dirname, '../../../'),
-            }
         ),
-        new StyleLintPlugin({
-            configFile: path.resolve(__dirname, '.stylelintrc')
+        new StylelintBarePlugin({
+            configFile: path.resolve(__dirname, '.stylelintrc'),
+            fix: true
         }),
         new BrowserSyncPlugin({
           proxy: SiteConfig.proxyUrl
