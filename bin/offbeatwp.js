@@ -15,6 +15,9 @@ const tasks = {
     production() {
         this.exec(`NODE_ENV='production' webpack --mode production --config ${webpackConfig} --color`);
     },
+    icons() {
+        this.exec(`node ${srcDirectory}/run icons --color`);
+    },
     exec(cmd) {
         const execCommand = exec(cmd);
 
