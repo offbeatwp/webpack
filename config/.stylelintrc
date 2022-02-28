@@ -6,6 +6,12 @@
     "stylelint-selector-bem-pattern"
   ],
   "rules": {
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["aspect-ratio"]
+      }
+    ],
     "number-leading-zero": "never",
     "selector-pseudo-element-colon-notation": "single",
     "rule-empty-line-before": [
