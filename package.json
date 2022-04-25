@@ -9,6 +9,9 @@
   "bin": {
     "offbeatwp": "bin/offbeatwp.js"
   },
+  "resolutions": {
+    "acorn": "npm:acorn-with-stage3"
+  },
   "dependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
